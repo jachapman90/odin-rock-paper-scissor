@@ -1,5 +1,6 @@
 let winCount = 0;
 let lossCount = 0;
+let gameCount = 0;
 
 let playerChoice = "";
 let computerChoice = "";
@@ -36,6 +37,7 @@ function playRound(p1, p2) {
     if (playerChoice === computerChoice) {
         console.log(p1);
         console.log(p2);
+        gameCount++;
         console.log("Tie, Play Again!");
     } else if ((playerChoice === "rock" && computerChoice === "paper") ||
         (playerChoice === "paper" && computerChoice === "scissors") ||
@@ -43,25 +45,31 @@ function playRound(p1, p2) {
         console.log(p1);
         console.log(p2);
         lossCount++;
+        gameCount++;
         console.log("You Lose!");
     } else {
         console.log(p1);
         console.log(p2);
         winCount++;
+        gameCount++;
         console.log("You Win!");
     }
 
     console.log("You: " + winCount);
     console.log("Computer: " + lossCount);
 
-    if (winCount >= 3) {
+    if (gameCount === 5 && winCount > lossCount) {
+        (alert("You won" + "\n" + winCount + "/5 rounds." + "\n" + 
+        "You Win The Game!"));
         winCount = 0;
         lossCount = 0;
-        return(alert("You Win The Game!"));
-    } else if (lossCount >= 3) {
+        gameCount = 0;
+    } else if (gameCount === 5 && winCount < lossCount) {
+        (alert("You won" + "\n" + lossCount + "/5 rounds." + "\n" + 
+        "You Lost The Game!"));
         winCount = 0;
         lossCount = 0;
-        return(alert("You Lose The Game!"));
+        gameCount == 0;
     }
   }
 
