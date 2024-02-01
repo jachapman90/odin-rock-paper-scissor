@@ -56,30 +56,24 @@ function playGame() {
         "You Lost The Game!"));
         winCount = 0;
         lossCount = 0;
-        gameCount == 0;
+        gameCount = 0;
     };
 };
 
 function scoreCount() {
     if (winner === "comp") {
-        const p1 = document.createElement('p');
         lossCount++;
         gameCount++;
-        p1.textContent = lossCount;
+        losses.textContent = `Losses: ${lossCount}`;
         winner = "";
-        return p1;
         console.log(gameCount);
     } else if (winner === "player") {
-        const p2 = document.createElement('p');
         winCount++;
         gameCount++;
-        p2.textContent = winCount;
+        wins.textContent = `Wins: ${winCount}`;
         winner = "";
-        return p2;
         console.log(gameCount);
     };
-    losses.appendChild(p1);
-    wins.appendChild(p2);
 };
 
 function getPlayerChoice() {
