@@ -1,4 +1,11 @@
 
+const btn = document.querySelector('button');
+const div = document.querySelector('#rps');
+const score = document.querySelector('#score');
+const losses = document.querySelector('#losses');
+const wins = document.querySelector('#wins');
+
+
 let winCount = 0;
 let lossCount = 0;
 let gameCount = 0;
@@ -7,12 +14,34 @@ let winner;
 let playerChoice = "";
 let computerChoice = "";
 
+div.addEventListener('click', (event) => {
+    let target = event.target;
+
+    switch(target.id) {
+        case 'rock':
+            playerChoice = "rock";
+            computerChoice = getComputerChoice();
+            playRound(playerChoice, computerChoice);
+            break;
+        case 'paper':
+            playerChoice = "paper";
+            computerChoice = getComputerChoice();
+            playRound(playerChoice, computerChoice);
+            break;
+        case 'scissors':
+            playerChoice = "scissors";
+            computerChoice = getComputerChoice();
+            playRound(playerChoice, computerChoice);
+            break;
+    };
+});
+
 function playGame() {
     while (gameCount < 5) {
-    playerChoice = getPlayerChoice();
+//    playerChoice = getPlayerChoice();
     computerChoice = getComputerChoice();
     playRound(playerChoice, computerChoice);
-    score();
+    scoreCount();
     };
     console.log("You: " + winCount);
     console.log("Computer: " + lossCount);
@@ -31,18 +60,26 @@ function playGame() {
     };
 };
 
-function score() {
+function scoreCount() {
     if (winner === "comp") {
+        const p1 = document.createElement('p');
         lossCount++;
         gameCount++;
+        p1.textContent = lossCount;
         winner = "";
+        return p1;
         console.log(gameCount);
     } else if (winner === "player") {
+        const p2 = document.createElement('p');
         winCount++;
         gameCount++;
+        p2.textContent = winCount;
         winner = "";
+        return p2;
         console.log(gameCount);
     };
+    losses.appendChild(p1);
+    wins.appendChild(p2);
 };
 
 function getPlayerChoice() {
@@ -62,11 +99,14 @@ function playRound(p1, p2) {
         console.log(p2);
         winner = "comp";
         console.log("You Lose!");
+        scoreCount();
         return(winner);
     } else {
         console.log(p1);
         console.log(p2);
+        winner = "player";
         console.log("You Win!");
+        scoreCount();
         return(winner);
     };
 
@@ -86,7 +126,7 @@ function getComputerChoice() {
     return(outputChoice);
 };
 
-playGame();
+//playGame();
 
 
 
